@@ -4,22 +4,25 @@
   "version": "1.0.0",
   "description": "Demo of publishing a library with linaria",
   "type": "commonjs",
-  "main": "./lib/cjs/main.js",
+  "main": "./lib/main.js",
   "module": "./lib/esm/main.js",
-  "types": "./lib/types/index.d.ts",
+  "types": "./lib/esm/main.d.ts",
   "sideEffects": false,
   "files": [
     "lib/"
   ],
   "exports": {
-    "import": "./lib/esm/main.js",
-    "require": "./lib/cjs/main.js"
+    ".": {
+      "import": "./lib/esm/main.js",
+      "require": "./lib/cjs/main.js"
+    },
+    "./css": {
+      "import": "./lib/esm/main.css",
+      "require": "./lib/cjs/main.css"
+    }
   },
   "scripts": {
-    "prebuild": "rimraf lib",
-    "build": "npm run build:bundle && npm run build:types",
-    "build:bundle": "node scripts/build.js",
-    "build:types": "tsc --emitDeclarationOnly --outDir lib/types",
+    "build": "tsup",
     "test": "npm run test:types",
     "test:types": "tsc --noEmit"
   },
@@ -39,9 +42,9 @@
     "@linaria/shaker": "^3.0.0-beta.23",
     "@types/node": "^14.18.51",
     "@types/react": "^17.0.62",
-    "esbuild": "^0.18.9",
     "react": "^17.0.2",
     "rimraf": "^5.0.1",
+    "tsup": "^6.7.0",
     "typescript": "^5.1.3"
   }
 }
