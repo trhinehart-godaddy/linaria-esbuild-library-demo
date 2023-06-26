@@ -1,0 +1,47 @@
+{
+  "private": true,
+  "name": "linaria-esbuild-library-demo",
+  "version": "1.0.0",
+  "description": "Demo of publishing a library with linaria",
+  "type": "commonjs",
+  "main": "./lib/cjs/main.js",
+  "module": "./lib/esm/main.js",
+  "types": "./lib/types/index.d.ts",
+  "sideEffects": false,
+  "files": [
+    "lib/"
+  ],
+  "exports": {
+    "import": "./lib/esm/main.js",
+    "require": "./lib/cjs/main.js"
+  },
+  "scripts": {
+    "prebuild": "rimraf lib",
+    "build": "npm run build:bundle && npm run build:types",
+    "build:bundle": "node scripts/build.js",
+    "build:types": "tsc --emitDeclarationOnly --outDir lib/types",
+    "test": "npm run test:types",
+    "test:types": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trhinehart-godaddy/linaria-esbuild-library-demo.git"
+  },
+  "peerDependencies": {
+    "react": ">=16"
+  },
+  "dependencies": {
+    "@linaria/core": "^3.0.0-beta.22",
+    "@linaria/react": "^3.0.0-beta.22"
+  },
+  "devDependencies": {
+    "@linaria/esbuild": "^3.0.0-beta.23",
+    "@linaria/shaker": "^3.0.0-beta.23",
+    "@types/node": "^14.18.51",
+    "@types/react": "^17.0.62",
+    "esbuild": "^0.18.9",
+    "react": "^17.0.2",
+    "rimraf": "^5.0.1",
+    "typescript": "^5.1.3"
+  }
+}
